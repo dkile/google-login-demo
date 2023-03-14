@@ -36,18 +36,21 @@ export default function Home() {
   };
 
   const onLoadGSI = () => {
-    window.google.accounts.id.initialize({
+    (window as any).google.accounts.id.initialize({
       client_id:
         "260952113847-40bmsga5bub0kgp7lnloij2k0qirhacg.apps.googleusercontent.com",
       callback: onSignIn,
     });
 
-    window.google.accounts.id.renderButton(googleSignInButton.current, {
-      theme: "filled_blue",
-      size: "large",
-      text: "SignIn",
-      width: "250",
-    });
+    (window as any).google.accounts.id.renderButton(
+      googleSignInButton.current,
+      {
+        theme: "filled_blue",
+        size: "large",
+        text: "SignIn",
+        width: "250",
+      }
+    );
   };
 
   return (
