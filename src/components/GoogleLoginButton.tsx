@@ -17,7 +17,7 @@ export default function GoogleLoginButton() {
     onSuccess: async (codeResponse) => {
       console.log(codeResponse);
       const tokens = await axios.post(
-        "https://api.server.d0lim.com/auth/api/google",
+        "https://api.server.d0lim.com/auth/google",
         {
           code: codeResponse.code,
         }
@@ -27,7 +27,6 @@ export default function GoogleLoginButton() {
     },
     onError: (error) => console.log("Login Failed:", error),
     flow: "auth-code",
-    redirect_uri: "https://api.server.d0lim.com/auth/api/google/callback",
   });
 
   useEffect(() => {
