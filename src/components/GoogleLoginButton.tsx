@@ -17,7 +17,7 @@ export default function GoogleLoginButton() {
     onSuccess: async (codeResponse) => {
       console.log(codeResponse);
       const tokens = await axios.post(
-        "https://api.server.d0lim.com/auth/google",
+        "https://api.server.d0lim.com/auth/v1/login/google",
         {
           code: codeResponse.code,
         }
