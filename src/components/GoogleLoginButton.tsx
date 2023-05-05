@@ -27,7 +27,7 @@ export default function GoogleLoginButton() {
           }
         );
         console.log(tokens);
-        setAccessToken((tokens as any).data.token.access_token);
+        setAccessToken((tokens as any).data.access_token);
         const myInfo = await getMyInfo();
         console.log(myInfo);
         setInfo(JSON.stringify((myInfo as any).data));
@@ -59,7 +59,7 @@ export default function GoogleLoginButton() {
         }
       });
     console.log(result);
-    setAccessToken((result as any).data.token.access_token);
+    setAccessToken((result as any).data.access_token);
     const myInfo = await getMyInfo();
     console.log(myInfo);
     setInfo(JSON.stringify((myInfo as any).data));
