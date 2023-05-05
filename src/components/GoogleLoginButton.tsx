@@ -28,6 +28,7 @@ export default function GoogleLoginButton() {
         );
         console.log(tokens);
         setAccessToken((tokens as any).data.access_token);
+        setComplete(true);
       } catch (e) {
 
         console.log(e);
@@ -56,6 +57,7 @@ export default function GoogleLoginButton() {
       });
     console.log(result);
     setAccessToken((result as any).data.access_token);
+    setComplete(true);
   }
 
   const getMyInfo = useCallback(async () => {
@@ -72,10 +74,9 @@ export default function GoogleLoginButton() {
       const myInfo = await getMyInfo();
       console.log(myInfo);
       setInfo(JSON.stringify((myInfo as any).data));
-      setComplete(true);
     };
     f();
-  }, [accessToken, getMyInfo])
+  }, [accessToken])
 
   return (
     <div>
