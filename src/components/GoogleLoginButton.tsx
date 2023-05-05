@@ -11,7 +11,7 @@ type TProfile = {
 export default function GoogleLoginButton() {
   const [isNew, setIsNew] = useState<boolean>(false);
   const [nickname, setNickname] = useState<string>("");
-  const [accessToken, setAccessToken] = useState<string>("");
+  const [accessToken, setAccessToken] = useState<string>();
   const [complete, setComplete] = useState(false);
   const [info, setInfo] = useState<string>("");
 
@@ -75,7 +75,7 @@ export default function GoogleLoginButton() {
       console.log(myInfo);
       setInfo(JSON.stringify((myInfo as any).data));
     };
-    f();
+    !!accessToken && f();
   }, [accessToken])
 
   return (
