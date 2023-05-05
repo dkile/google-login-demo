@@ -67,10 +67,8 @@ export default function GoogleLoginButton() {
   }
 
   const getMyInfo = async () => {
-    return await axios.post("https://api.server.d0lim.com/auth/v1/me",
+    return await axios.get("https://api.server.d0lim.com/auth/v1/me",
       {
-        nickname
-      }, {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
