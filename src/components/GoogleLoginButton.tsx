@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useGoogleLogin} from "@react-oauth/google";
 import axios from "axios";
 
@@ -28,10 +28,6 @@ export default function GoogleLoginButton() {
         );
         console.log(tokens);
         setAccessToken((tokens as any).data.access_token);
-        const myInfo = await getMyInfo();
-        console.log(myInfo);
-        setInfo(JSON.stringify((myInfo as any).data));
-        setComplete(true);
       } catch (e) {
 
         console.log(e);
@@ -60,20 +56,26 @@ export default function GoogleLoginButton() {
       });
     console.log(result);
     setAccessToken((result as any).data.access_token);
-    const myInfo = await getMyInfo();
-    console.log(myInfo);
-    setInfo(JSON.stringify((myInfo as any).data));
-    setComplete(true);
   }
 
-  const getMyInfo = async () => {
+  const getMyInfo = useCallback(async () => {
     return await axios.get("https://api.server.d0lim.com/auth/v1/me",
       {
         headers: {
           Authorization: `Bearer ${accessToken}`
         }
       });
-  }
+  }, [accessToken])
+
+  useEffect(() => {
+    const f = async () => {
+      const myInfo = await getMyInfo();
+      console.log(myInfo);
+      setInfo(JSON.stringify((myInfo as any).data));
+      setComplete(true);
+    };
+    f();
+  }, [accessToken, getMyInfo])
 
   return (
     <div>
