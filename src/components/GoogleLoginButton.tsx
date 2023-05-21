@@ -27,7 +27,9 @@ export default function GoogleLoginButton() {
           }
         );
         console.log(tokens);
-        setAccessToken((tokens as any).data.access_token);
+        console.log(tokens.headers);
+        const authorizationHeaderValue = tokens.headers["authorization"]
+        setAccessToken(authorizationHeaderValue);
         setComplete(true);
       } catch (e) {
 
@@ -52,7 +54,7 @@ export default function GoogleLoginButton() {
         nickname
       }, {
         headers: {
-          Authorization: `Bearer ${accessToken}`
+          Authorization: accessToken
         }
       });
     console.log(result);
@@ -64,7 +66,7 @@ export default function GoogleLoginButton() {
     return await axios.get("https://api.server.d0lim.com/auth/v1/me",
       {
         headers: {
-          Authorization: `Bearer ${accessToken}`
+          Authorization: accessToken
         }
       });
   }, [accessToken])
