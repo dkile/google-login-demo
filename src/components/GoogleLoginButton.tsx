@@ -37,7 +37,7 @@ export default function GoogleLoginButton() {
         if ((e as any).response.data.error_code === "NEW_USER") {
           console.log("new user, show nickname form")
           setIsNew(true);
-          setAccessToken((e as any).response.data.token.access_token);
+          setAccessToken((e as any).response.headers.authorization);
         }
       }
     },
